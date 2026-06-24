@@ -1,0 +1,17 @@
+.root {
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-background-color: #f0f2f5;
+}
+.list-view {
+    -fx-background-color: transparent;
+}
+.button {
+    -fx-background-color: #0084ff;
+    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-padding: 5 15 5 15;
+}
+.text-field {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
