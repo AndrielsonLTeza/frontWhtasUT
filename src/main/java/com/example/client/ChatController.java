@@ -47,16 +47,27 @@ public class ChatController {
         System.out.println("Novo pedido no grupo " + groupName + " de " + userName);
     }
 
+   // Adicione estas variáveis de estado
+    private String currentTargetGroup; // ou o nome do usuário privado
+
     @FXML
     private void handleSendMessage() {
         String text = messageField.getText();
-        if (text != null && !text.isEmpty()) {
+        if (text != null && !text.isEmpty() && server != null) {
             try {
-                // Aqui você deve decidir para onde enviar (Grupo ou Privado)
-                // Exemplo: server.sendGroupTextMessage("NomeDoGrupo", currentUser, new TextMessage(text, ...));
+                // Cria a mensagem (ajuste conforme seu construtor de TextMessage)
+                TextMessage msg = new TextMessage(text, currentUser); 
+                
+                // Envia para o servidor
+                if (currentTargetGroup != null) {
+                    server.sendGroupTextMessage(currentTargetGroup, currentUser, msg);
+                } else {
+                    // Lógica para mensagem privada caso não haja grupo selecionado
+                }
+                
                 messageField.clear();
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (RemoteException e) {
+                System.err.println("Erro ao enviar mensagem: " + e.getMessage());
             }
         }
     }
